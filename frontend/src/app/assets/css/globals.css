@@ -29,7 +29,7 @@ h1{
 
 }
 
-.card[tipo="fii"]{
+.card[data-tipo="fii"]{
   background: #3b297ac4;
 }
 

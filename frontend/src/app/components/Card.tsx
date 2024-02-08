@@ -2,7 +2,7 @@
 const time = new Date().toTimeString();
 
 export const Card = (props: Ativo) =>(
-        <div tipo={props.type} className="card" onClick={() => cardClicked(`${props.code}`)}>
+        <div data-tipo={props.type} className="card" onClick={() => cardClicked(`${props.code}`)}>
           <p className="card-title">{props.code} <br/> {props.cotacao}</p>
           <p className="card-text">
               <p><strong>P/L:</strong> {props.PL}</p>
