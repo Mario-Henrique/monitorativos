@@ -1,0 +1,60 @@
+body{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+h1{
+  text-align: center;
+  font-size: 3em;
+  text-decoration: overline;   
+}
+
+#cardContainer{
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.card{
+  margin: 5px;
+  padding: .8em;
+
+  min-width: 300px;
+  max-width: fit-content;
+
+  background-color: #93f325ad;
+
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px #00000025;
+
+}
+
+.card[tipo="fii"]{
+  background: #3b297ac4;
+}
+
+.card:hover[onclick]{
+  box-shadow: -4px -4px 5px #00000025;
+  font-size: .96em;
+  
+  background: #998080;
+  
+  cursor: pointer;
+}
+
+.card-title{
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.card-text{
+  text-align: left;
+  font-size: 1em;
+}
+
+.time{
+  font-size: .7em;
+  display: flex;
+  justify-content: center;
+}
