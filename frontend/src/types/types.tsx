@@ -11,3 +11,7 @@ type Ativo = {
     Valor: String,
     time: String
 }
+
+type Code = {
+    code: String
+}
