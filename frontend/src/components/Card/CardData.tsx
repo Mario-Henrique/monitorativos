@@ -15,7 +15,7 @@ const baseUrl = headers().get('host');
 export default async function CardData({code}: CardDataType){
     const time = new Date().toTimeString();
     // const response = await fetch(`${baseUrl}/api?code=${code}`);
-    const response = await fetch(`http://${baseUrl}/api?code=${code}`);
+    const response = await fetch(`https://${baseUrl}/api?code=${code}`);
     const props = await response.json();
 
     if(props.isSuccess){

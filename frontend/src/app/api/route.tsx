@@ -19,6 +19,7 @@ export async function GET(req: NextRequest){
 
             const response = NextResponse.json(responseData);
             response.headers.set('Cache-Control','s-maxage=900, stale-while-revalidate');
+            response.headers.set('X-Async-Storage','requestAsyncStorage');
 
             return response;
         }
