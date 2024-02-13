@@ -1,25 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
+import { AssetInfo, searchAction } from "./webscrapping";
 
 type ResponseData = {
-    message: string;
-    code: string;
+    data: AssetInfo;
+    isSuccess: boolean;
 }
 
 export async function GET(req: NextRequest){
-    const time = new Date().toTimeString();
-    const code = req.nextUrl.searchParams.get("code");
-    
-    if (code){
-        const responseData: ResponseData = {
-            message: time,
-            code
-        };
+    try{
+        const code = req.nextUrl.searchParams.get("code");
+        
+        if (code){
+            const data = await searchAction(code);
+            const responseData: ResponseData = {
+                data,
+                isSuccess: true
+            };
 
-        const response = NextResponse.json(responseData);
-        response.headers.set('Cache-Control','s-maxage=10, stale-while-revalidate');
+            const response = NextResponse.json(responseData);
+            response.headers.set('Cache-Control','s-maxage=900, stale-while-revalidate');
 
-        return response;
+            return response;
+        }
+    } catch(err) {
+        return NextResponse.json({data: null, isSuccess: false})
     }
 
-    return NextResponse.json({error: 'Erro ao recuperar dados.'})
 }

@@ -1,24 +1,39 @@
-import searchAction from "@/app/api/webscrapping";
+import { headers } from 'next/headers';
 
 type CardDataType = {
     code: string;
 }
 
+type Props = {
+    props: {
+        host: string
+    }
+}
+
+const baseUrl = headers().get('host');
+
 export default async function CardData({code}: CardDataType){
     const time = new Date().toTimeString();
-    const props = await searchAction(code);
+    // const response = await fetch(`${baseUrl}/api?code=${code}`);
+    const response = await fetch(`http://${baseUrl}/api?code=${code}`);
+    const props = await response.json();
 
-    return (
-        <div data-tipo={props.type} className="card">
-            <p className="card-title">{props.code} <br/> {props.cotacao}</p>
-            <div className="card-text">
-                <p><strong>P/L:</strong> {props.PL}</p>
-                <p><strong>P/VP:</strong> {props.PVP}</p>
-                <p><strong>DY:</strong> {props.DY}</p>
-                <p><strong>Total Ativos:</strong> 0</p>
-                <p><strong>Preço Médio:</strong> String</p>
+    if(props.isSuccess){
+        return (
+            <div data-tipo={props.data.type} className="card">
+                <p className="card-title">{props.data.code} <br/> {props.data.cotacao}</p>
+                <div className="card-text">
+                    <p><strong>P/L:</strong> {props.data.PL}</p>
+                    <p><strong>P/VP:</strong> {props.data.PVP}</p>
+                    <p><strong>DY:</strong> {props.data.DY}</p>
+                    <p><strong>Total Ativos:</strong> 0</p>
+                    <p><strong>Preço Médio:</strong> String</p>
+                    <p><strong>Próx. Pagamento:</strong> {props.data.DataEx}</p>
+                </div>
+                <span className="time">{time}</span>
             </div>
-            <span className="time">{time}</span>
-        </div>
-    )
+        )
+    } else {
+        return <h2>Error</h2>
+    }
 }
